@@ -29,17 +29,28 @@ public class ApplicationHandler extends HttpServlet {
 	private void handle(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("userID") != null && LoggedInUsers.isLogged((String) session.getAttribute("userID"))) {
-			
+
 		} else {
 			// log the fuckin' user
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			/*
-			 * if(e valid in db){adauga in loggedUsers; 
-			 * adauga in sesiune;
+			 * if(e valid in db){adauga in loggedUsers; adauga in sesiune;
 			 * }else{inapoi la login + warning}
 			 */
-			session.setAttribute("userID", LoggedInUsers.logUser(username));
+			try {
+				if (true /* valid in db */) {
+					session.setAttribute("userID", LoggedInUsers.logUser(username));
+					response.sendRedirect("userScreen.jsp");
+					return;
+				} else {
+					session.setAttribute("invalidData", "Datele de logare sunt invalide!");
+					response.sendRedirect("index.jsp");
+					return;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
