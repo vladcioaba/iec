@@ -39,7 +39,7 @@ public class ApplicationHandler extends HttpServlet {
 			 * }else{inapoi la login + warning}
 			 */
 			try {
-				if (true /* valid in db */) {
+				if (LoggedInUsers.isValid(username, password)) {
 					session.setAttribute("userID", LoggedInUsers.logUser(username));
 					response.sendRedirect("userScreen.jsp");
 					return;
