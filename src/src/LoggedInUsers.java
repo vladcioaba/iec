@@ -11,5 +11,8 @@ public class LoggedInUsers {
 		}
 		return false;
 	}
-	
+	public static String logUser(String username){
+		String userId = null;
+		return userId;
+	}
 }
