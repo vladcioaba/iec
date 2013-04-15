@@ -3,7 +3,13 @@ package src;
 import java.util.HashMap;
 
 public class LoggedInUsers {
-	static HashMap<Integer, User> loggedUsers = new HashMap<Integer,User>();
-	
+	private static HashMap<String, User> loggedUsers = new HashMap<String,User>();
+	 
+	public static boolean isLogged(String userId){
+		if(loggedUsers.containsKey(userId)){
+			return true;
+		}
+		return false;
+	}
 	
 }
