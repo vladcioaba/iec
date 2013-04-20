@@ -15,7 +15,7 @@ public class LoggedInUsers {
 	public static String logUser(String username) {
 		String userId = null;
 		// baga in hash
-		return userId;
+		return username;
 	}
 
 	public static boolean isValid(String username, String password) {

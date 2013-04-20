@@ -40,7 +40,7 @@ public class ApplicationHandler extends HttpServlet {
 			 */
 			try {
 				if (LoggedInUsers.isValid(username, password)) {
-					session.setAttribute("userID", LoggedInUsers.logUser(username));
+					session.setAttribute("userName", LoggedInUsers.logUser(username));
 					response.sendRedirect("userScreen.jsp");
 					return;
 				} else {
