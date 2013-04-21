@@ -1,7 +1,8 @@
 package iec.database;
 
+import iec.data.User;
+
 import java.util.Date;
-import data.User;
 
 public class DatabaseManager {
 
@@ -32,7 +33,7 @@ public class DatabaseManager {
 	// **************************************************************************************************************************
 	// USER HISTORY METHODS
 	// **************************************************************************************************************************
-	public void get
+	//public void get
 	
 	
 	

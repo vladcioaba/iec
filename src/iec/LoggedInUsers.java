@@ -1,5 +1,7 @@
 package iec;
 
+import iec.data.User;
+
 import java.util.HashMap;
 
 public class LoggedInUsers {
