@@ -1,4 +1,4 @@
-package src;
+package iec.data;
 
 public class User {
 	

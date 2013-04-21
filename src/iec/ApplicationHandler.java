@@ -1,4 +1,4 @@
-package src;
+package iec;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,6 +10,11 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/ApplicationHandler")
 public class ApplicationHandler extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public ApplicationHandler() {
 		super();
@@ -28,7 +33,8 @@ public class ApplicationHandler extends HttpServlet {
 
 	private void handle(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("userID") != null && LoggedInUsers.isLogged((String) session.getAttribute("userID"))) {
+		if (session.getAttribute("userID") != null &&
+			LoggedInUsers.isLogged( (String) session.getAttribute("userID"))) {
 
 		} else {
 			// log the fuckin' user
