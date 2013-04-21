@@ -95,6 +95,8 @@ public class DatabaseManager {
 	private Connection 	sConnection;
 	
     private Statement 	sStatement;
-
+    public static void main(String[] args) {
+		new DatabaseManager().create();
+	}
 	
 }
