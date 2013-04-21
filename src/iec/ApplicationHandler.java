@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import iec.database.*; 
+
 @WebServlet("/ApplicationHandler")
 public class ApplicationHandler extends HttpServlet {
 
@@ -18,6 +20,8 @@ public class ApplicationHandler extends HttpServlet {
 
 	public ApplicationHandler() {
 		super();
+		
+		DatabaseManager.getInstance();
 	}
 
 	/*

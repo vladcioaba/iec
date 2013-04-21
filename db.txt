@@ -1,0 +1,4 @@
+db host: sql2.freesqldatabase.com
+db name: sql26269
+db user: sql26269
+db pass: aZ7*cS2*
