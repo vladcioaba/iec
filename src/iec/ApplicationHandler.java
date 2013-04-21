@@ -20,7 +20,6 @@ public class ApplicationHandler extends HttpServlet {
 
 	public ApplicationHandler() {
 		super();
-		
 		DatabaseManager.getInstance();
 	}
 
