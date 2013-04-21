@@ -1,16 +1,21 @@
 package iec.database;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Vector;
 import iec.data.User;
 import iec.data.UserTest;
 import iec.data.Test;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import com.mysql.jdbc.PreparedStatement;
 
 public class DatabaseManager {
 
@@ -34,14 +39,34 @@ public class DatabaseManager {
 	// **************************************************************************************************************************
 	// USER METHODS
 	// **************************************************************************************************************************
-	public boolean addUser(String userId)
+	public User addUser(String name, String password)
 	{
-		try {
-			ResultSet rs = sStatement.executeQuery("select 1+1 from dual");
+		if (name == null ||
+			password == null)
+		{
+			return null;
+		}
+
+		Date date = new Date(Calendar.getInstance().getTimeInMillis());
+		String md5pass =  convertToMd5(password);
+		String query = " insert into users (name, password, last_login)"
+        	 				+ " values (?, ?, ?)";
+		
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+			 preparedStmt.setString (1, name);
+	 		 preparedStmt.setString (2, md5pass);
+	 		 preparedStmt.setDate(3, (java.sql.Date) date);
+
+	 		 // execute the preparedstatement
+	 		 preparedStmt.execute();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		
+		return null;
 	}
 	
 	public boolean removeUser(String userId)
@@ -84,19 +109,51 @@ public class DatabaseManager {
 	{
 	    try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            sConnection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/sql26269", "sql26269", "aZ7*cS2*");
-            sConnection.setAutoCommit(true);
-            sStatement = sConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            mConnection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/sql26269", "sql26269", "aZ7*cS2*");
+            mConnection.setAutoCommit(true);
+            mStatement = mConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 	}
 	
-	private Connection 	sConnection;
-	
-    private Statement 	sStatement;
-    public static void main(String[] args) {
-		new DatabaseManager().create();
+	private String convertToMd5(String str)
+	{
+		MessageDigest md = null;
+    	try {
+    		md = MessageDigest.getInstance("SHA-1");
+    	} catch (NoSuchAlgorithmException e)
+    	{
+    		return null;
+    	}
+    	
+		StringBuffer in = new StringBuffer(str);
+		
+		int nread = 0; 
+        while (nread < in.length())
+        {
+        	md.update((byte) in.charAt(nread));
+        };
+        byte[] mdbytes = md.digest();
+ 
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < mdbytes.length; i++) {
+          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+		return sb.toString();
 	}
+	
+	private Connection 	mConnection;
+	
+    private Statement 	mStatement;
+    
+    public static void main(String[] args) {
+    	DatabaseManager dm = new DatabaseManager();
+    	dm.create();
+    	
+
+		User u = dm.addUser("pulica", "pulica");
+   }
 	
 }

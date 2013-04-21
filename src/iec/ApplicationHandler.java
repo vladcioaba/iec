@@ -34,6 +34,12 @@ public class ApplicationHandler extends HttpServlet {
 		handle(request, response);
 	}
 
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		DatabaseManager.getInstance();
+	}
+	
 	private void handle(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("userID") != null &&
