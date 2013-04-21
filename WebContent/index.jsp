@@ -4,8 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link rel="stylesheet" href="CSS/css.css" type="text/css">
-</link>
+<link rel="stylesheet" href="CSS/css.css" type="text/css" />
 <title>Influential eCoding Login</title>
 </head>
 
@@ -37,7 +36,10 @@
 									<input type="text" name="username"><br> 
 									<input type="password" name="password"><br> 
 									<button type="submit">LOGIN</button><br>
-									<div> <%=(session.getAttribute("invalidData")==null)?(""):(session.getAttribute("invalidData")) %> </form>
+									<div>
+									<%=(session.getAttribute("invalidData")==null)?(""):(session.getAttribute("invalidData")) %>
+									</div>
+								</form>
 							</div>
 
 						</div>
