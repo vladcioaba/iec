@@ -2,12 +2,21 @@ package iec.data;
 
 public class Test {
 
-	public String getTestId()
+	public Test(int id, int type, int difficulty, String body, String answer, int correct)
+	{
+		mTestId = id;
+		mTestType = type;
+		mTestBody = body;
+		mTestAnswers = answer.split("\n\r");
+		mTestCorrectAnswerIndex = correct;
+	}
+	
+	public int getTestId()
 	{
 		return mTestId;
 	}
 	
-	public String getTestType()
+	public int getTestType()
 	{
 		return mTestType;
 	}
@@ -32,8 +41,8 @@ public class Test {
 		return mTestDifficulty;
 	}
 	
-	private String		mTestId;
-	private String		mTestType;
+	private int			mTestId;
+	private int			mTestType;
 	private String		mTestBody;
 	private String[]	mTestAnswers;
 	private int			mTestCorrectAnswerIndex;

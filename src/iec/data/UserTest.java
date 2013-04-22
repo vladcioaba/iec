@@ -2,19 +2,36 @@ package iec.data;
 
 import java.util.Date;
 
-import iec.data.Test;
-
 public class UserTest {
 
-	
-	public Test getTestData()
+	public UserTest(int id, int userId, int testId, int answer, Date start, Date end)
 	{
-		return mTestData;
+		 mId = id;
+		 mUserId = userId;
+		 mTestId = testId;
+		 mUserAnswer = answer;
+		 mTestStartDate = start;
+		 mTestEndDate = end;
 	}
-
-	public String getTestId()
+	
+	public int getId()
+	{
+		return mId;
+	}
+	
+	public int getTestId()
 	{
 		return mTestId;
+	}
+	
+	public int getUserId()
+	{
+		return mUserId;
+	}
+	
+	public int getUserAnswer()
+	{
+		return mUserAnswer;
 	}
 	
 	public Date getTestStartDate()
@@ -27,9 +44,10 @@ public class UserTest {
 		return mTestEndDate;
 	}
 	
-	private String 			mTestId;
-	private Test 			mTestData;
-	private String			mUserAnswer;
+	private	int 			mId;
+	private int 			mUserId;
+	private int 			mTestId;
+	private int				mUserAnswer;
 	private Date			mTestStartDate;
 	private Date			mTestEndDate;
 }

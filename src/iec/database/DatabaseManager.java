@@ -16,12 +16,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.ResultSetRow;
 
 public class DatabaseManager {
-
+	
 	// **************************************************************************************************************************
 	// STATIC MEMBERS
 	// **************************************************************************************************************************
+	
+	public static void main(String[] args) {
+		DatabaseManager dm = new DatabaseManager();
+		dm.create();
+/*
+		User u1 = dm.addUser("pulica", "pulica");
+		u1.getUserId();
+		
+		User u2 = dm.autenticateUser("pulica", "pulica");
+		u2.getUserId();
+*/
+		dm.setTestComplete(10, 1, 1, new Date(1), new Date(2));
+		dm.setTestComplete(10, 2, 1, new Date(1), new Date(2));
+		dm.setTestComplete(10, 3, 1, new Date(1), new Date(2));
+		
+		Vector<UserTest> vec = dm.getUserTestHistory(10);
+		vec.size();
+	}
+	
 	private static DatabaseManager sInstance;
 	
 	public static DatabaseManager getInstance()
@@ -46,12 +66,12 @@ public class DatabaseManager {
 		{
 			return null;
 		}
-
+		
 		Date date = new Date(Calendar.getInstance().getTimeInMillis());
 		String md5pass =  convertToMd5(password);
 		String query = " insert into users (name, password, last_login)"
         	 				+ " values (?, ?, ?)";
-		
+		int userId = -1;
 		try
 		{
 			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
@@ -61,40 +81,167 @@ public class DatabaseManager {
 
 	 		 // execute the preparedstatement
 	 		 preparedStmt.execute();
+	 		 ResultSet result = preparedStmt.getResultSet();
+ 			 userId = result.getInt("userid");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
+		User ret = new User(userId, name, date);
+		return ret;
+	}
+	
+	public boolean removeUser(int userId)
+	{
+		if (userId <= 0)
+		{
+			return false;
+		}
+		
+		String query = " delete from users where 'userid' = ?";
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+			 preparedStmt.setInt(1, userId);
+		
+			 // execute the preparedstatement
+			 preparedStmt.execute();
+			 return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return null;
-	}
-	
-	public boolean removeUser(String userId)
-	{
 		return false;
 	}
 	
-	public User autenticateUser(String userName, String password)
+	public User autenticateUser(String name, String password)
 	{
-		return null;
-	}
-	
-	public Date getUserLastTimeAutenticationDate()
-	{
-		return null;
+		if (name == null ||
+			password == null)
+		{
+			return null;
+		}
+		
+		Date date = new Date(Calendar.getInstance().getTimeInMillis());
+		String md5pass =  convertToMd5(password);
+		int userId = -1;		
+		String query = " update users set 'last_login' = ?  where 'userid' = ? and 'password' = ?";
+		
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+	 		 preparedStmt.setDate(1, (java.sql.Date) date);
+			 preparedStmt.setString (2, name);
+	 		 preparedStmt.setString (3, md5pass);
+
+			 // execute the preparedstatement
+			 preparedStmt.execute();
+			 ResultSet result = preparedStmt.getResultSet();
+ 			 userId = result.getInt("userid");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			 return null;
+		}
+		
+		User ret = new User(userId, name, date);
+		return ret;
 	}
 	
 	// **************************************************************************************************************************
 	// USER HISTORY METHODS
 	// **************************************************************************************************************************
-	public Vector<UserTest> getUserTestHistory(String userId)
+	public Vector<UserTest> getUserTestHistory(int userId)
 	{
-		return null;
+		if (userId <= 0)
+		{
+			return null;
+		}
+		
+		String query = " select * from history where 'userid' = ?";
+		Vector<UserTest> ret = new Vector<UserTest>();
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+			 preparedStmt.setInt(1, userId);
+ 			 // execute the preparedstatement
+			 preparedStmt.execute();
+			 
+			 ResultSet result = preparedStmt.getResultSet();
+ 			 
+			 while (result.next())
+			 {
+				 int id = result.getInt("id");
+				 int userId2 = result.getInt("userid");
+				 int testId = result.getInt("testid");
+				 int answer = result.getInt("answer");
+				 Date date_start = result.getDate("date_start");
+				 Date date_end = result.getDate("date_end");
+				 
+				 ret.addElement(new UserTest(id, userId2, testId, answer, date_start, date_end));
+			 }
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
+		return ret;
 	}
 	
 	public Vector<Test> getTests()
 	{
-		return null;
+		String query = " select * from teste";
+		Vector<Test> ret = new Vector<Test>();
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+ 			 // execute the preparedstatement
+			 preparedStmt.execute();
+			 
+			 ResultSet result = preparedStmt.getResultSet();
+ 			 
+			 while (result.next())
+			 {
+				 int testId = result.getInt("testid");
+				 int testType = result.getInt("type");
+				 int testDifficulty = result.getInt("difficulty");
+				 String testBody = result.getString("body");
+				 String testAnswer = result.getString("answer");
+				 int correct = result.getInt("correct");
+				 
+				 ret.addElement(new Test(testId, testType, testDifficulty, testBody, testAnswer, correct));
+			 }
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
+		return ret;
+	}
+	
+	public void setTestComplete(int userId, int testId, int answer, Date start, Date end)
+	{
+		if (userId <= 0 || testId <= 0 || start == null || end == null)
+		{
+			return;
+		}
+		
+		String query = " insert into history (userid, testid, answer, date_start, date_end)"
+							+ " values (?, ?, ?, ?, ?)";
+		try
+		{
+			 PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(query);
+ 	 		 // execute the preparedstatement
+			 preparedStmt.setInt(1, userId);
+			 preparedStmt.setInt(2, testId);
+			 preparedStmt.setInt(3, answer);
+			 preparedStmt.setDate(4, start);
+			 preparedStmt.setDate(5, end);
+	 		 preparedStmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// **************************************************************************************************************************
@@ -132,7 +279,7 @@ public class DatabaseManager {
 		int nread = 0; 
         while (nread < in.length())
         {
-        	md.update((byte) in.charAt(nread));
+        	md.update((byte) in.charAt(nread++));
         };
         byte[] mdbytes = md.digest();
  
@@ -147,13 +294,4 @@ public class DatabaseManager {
 	private Connection 	mConnection;
 	
     private Statement 	mStatement;
-    
-    public static void main(String[] args) {
-    	DatabaseManager dm = new DatabaseManager();
-    	dm.create();
-    	
-
-		User u = dm.addUser("pulica", "pulica");
-   }
-	
 }
