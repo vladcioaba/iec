@@ -7,7 +7,7 @@ public class Test {
 		mTestId = id;
 		mTestType = type;
 		mTestBody = body;
-		mTestAnswers = answer.split("\n\r");
+		mTestAnswers = answer.split("\\\\n\\\\r");
 		mTestCorrectAnswerIndex = correct;
 	}
 	
