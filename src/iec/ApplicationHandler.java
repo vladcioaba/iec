@@ -8,19 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import iec.database.*; 
+import iec.database.*;
 
 @WebServlet("/ApplicationHandler")
 public class ApplicationHandler extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ApplicationHandler() {
 		super();
-		DatabaseManager.getInstance();
 	}
 
 	/*
@@ -39,23 +35,17 @@ public class ApplicationHandler extends HttpServlet {
 		super.init();
 		DatabaseManager.getInstance();
 	}
-	
+
 	private void handle(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("userID") != null &&
-			LoggedInUsers.isLogged( (String) session.getAttribute("userID"))) {
+		if (session.getAttribute("userID") != null && LoggedInUsers.isLogged((String) session.getAttribute("userName"))) {
 
 		} else {
-			// log the fuckin' user
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			/*
-			 * if(e valid in db){adauga in loggedUsers; adauga in sesiune;
-			 * }else{inapoi la login + warning}
-			 */
 			try {
 				if (LoggedInUsers.isValid(username, password)) {
-					session.setAttribute("userName", LoggedInUsers.logUser(username));
+					session.setAttribute("userName", username);
 					response.sendRedirect("userScreen.jsp");
 					return;
 				} else {

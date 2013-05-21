@@ -38,6 +38,8 @@ public class DatabaseManager {
 //		Vector<UserTest> vec = dm.getUserTestHistory(u1.getUserId());
 //		vec.size();
 		
+		//dm.addUser("admin", "admin");
+		
 		Vector<Test>tests = dm.getTests();
 		tests.size();
 		
@@ -61,7 +63,7 @@ public class DatabaseManager {
 	// **************************************************************************************************************************
 	// USER METHODS
 	// **************************************************************************************************************************
-	public User addUser(String name, String password)
+	public static synchronized User addUser(String name, String password)
 	{
 		if (name == null ||
 			password == null)
@@ -100,7 +102,7 @@ public class DatabaseManager {
 		return ret;
 	}
 	
-	public boolean removeUser(int userId)
+	public static synchronized boolean removeUser(int userId)
 	{
 		if (userId <= 0)
 		{
@@ -122,7 +124,7 @@ public class DatabaseManager {
 		return false;
 	}
 	
-	public User autenticateUser(String name, String password)
+	public static synchronized User autenticateUser(String name, String password)
 	{
 		if (name == null ||
 			password == null)
@@ -172,7 +174,7 @@ public class DatabaseManager {
 	// **************************************************************************************************************************
 	// USER HISTORY METHODS
 	// **************************************************************************************************************************
-	public Vector<UserTest> getUserTestHistory(int userId)
+	public static synchronized Vector<UserTest> getUserTestHistory(int userId)
 	{
 		if (userId <= 0)
 		{
@@ -210,7 +212,7 @@ public class DatabaseManager {
 		return ret;
 	}
 	
-	public Vector<Test> getTests()
+	public static synchronized Vector<Test> getTests()
 	{
 		String query = "select * from teste";
 		Vector<Test> ret = new Vector<Test>();
@@ -240,7 +242,7 @@ public class DatabaseManager {
 		return ret;
 	}
 	
-	public void setTestComplete(int userId, int testId, int answer, Date start, Date end)
+	public static synchronized void setTestComplete(int userId, int testId, int answer, Date start, Date end)
 	{
 		if (userId <= 0 || testId <= 0 || start == null || end == null)
 		{
@@ -272,19 +274,18 @@ public class DatabaseManager {
 		
 	}
 	
-	private void create()
+	private static synchronized void create()
 	{
 	    try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             mConnection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/sql26269", "sql26269", "aZ7*cS2*");
             mConnection.setAutoCommit(true);
-            mStatement = mConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 	}
 	
-	private String convertToMd5(String str)
+	private static synchronized String convertToMd5(String str)
 	{
 		MessageDigest md = null;
     	try {
@@ -311,7 +312,6 @@ public class DatabaseManager {
 		return sb.toString();
 	}
 	
-	private Connection 	mConnection;
+	private static Connection 	mConnection;
 	
-    private Statement 	mStatement;
 }

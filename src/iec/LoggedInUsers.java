@@ -1,25 +1,32 @@
 package iec;
 
 import iec.data.User;
+import iec.database.DatabaseManager;
+
 import java.util.HashMap;
 
 public class LoggedInUsers {
-	private static HashMap<String, User> loggedUsers = new HashMap<String, User>();
+	private static HashMap<String, String> loggedUsers = new HashMap<String, String>();
 
-	public static boolean isLogged(String userId) {
-		if (loggedUsers.containsKey(userId)) {
+	public static boolean isLogged(String username) {
+		if (loggedUsers.containsValue(username)) {
 			return true;
 		}
 		return false;
 	}
 
-	public static String logUser(String username) {
-		String userId = null;
-		// baga in hash
-		return username;
+	public static void logUser(User user) {
+		String userId = String.valueOf(user.getUserId());
+		String username = user.getUserName();
+		loggedUsers.put(userId, username);
 	}
 
 	public static boolean isValid(String username, String password) {
-		return true;
+		User user = DatabaseManager.autenticateUser(username, password);
+		if (user.getUserId() != -1) {
+			logUser(user);
+			return true;
+		}
+		return false;
 	}
 }

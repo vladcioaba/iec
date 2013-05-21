@@ -1,3 +1,4 @@
+<%@page import="iec.LoggedInUsers"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <html>
@@ -9,6 +10,11 @@
 </head>
 
 <body>
+	<% 
+		if(LoggedInUsers.isLogged((String) session.getAttribute("userName"))){
+			response.sendRedirect("userScreen.jsp");
+		}
+	%>
 	<div class="Logo">
 		<img class="logo" src="Images/logo.jpg" />
 	</div>
