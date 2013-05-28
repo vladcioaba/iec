@@ -43,7 +43,12 @@
 									<input type="password" name="password"><br> 
 									<button type="submit">LOGIN</button><br>
 									<div>
-									<%=(session.getAttribute("invalidData")==null)?(""):(session.getAttribute("invalidData")) %>
+									<%
+									if(session.getAttribute("invalidData")!=null){
+										out.print(session.getAttribute("invalidData"));
+										session.removeAttribute("invalidData");
+									}
+									%>
 									</div>
 								</form>
 							</div>

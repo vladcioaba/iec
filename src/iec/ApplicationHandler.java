@@ -39,7 +39,7 @@ public class ApplicationHandler extends HttpServlet {
 	private void handle(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("userID") != null && LoggedInUsers.isLogged((String) session.getAttribute("userName"))) {
-
+			
 		} else {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
