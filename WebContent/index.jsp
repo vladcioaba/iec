@@ -38,7 +38,7 @@
 
 							</div>
 							<div class="right">
-								<form action="ApplicationHandler" method="post">
+								<form action="Login" method="post">
 									<input type="text" name="username"><br> 
 									<input type="password" name="password"><br> 
 									<button type="submit">LOGIN</button><br>
