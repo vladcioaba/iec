@@ -2,7 +2,9 @@
 <div class="MainBack" align="center">
 	<div class="taskbar">
 		<div class="header">
-			<h1 class="header">1.1 Introduction to C++</h1>
+			<h1 class="header">
+				<%@include file="/lessonTitle.jsp"%>
+			</h1>
 		</div>
 		<form action="Logout" method="post">
 			<button type="submit" class="logout">Logout</button>
@@ -13,7 +15,6 @@
 		<div class="content">
 			<div class="realcontent">
 				<%
-					int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"));
 					switch (noLesson) {
 					case 101: {
 				%>
@@ -57,6 +58,108 @@
 				<%
 					break;
 					}
+					case 201: {
+				%>
+				<%@include file="/lessons/lesson201.jsp"%>
+				<%
+					break;
+					}
+					case 202: {
+				%>
+				<%@include file="/lessons/lesson202.jsp"%>
+				<%
+					break;
+					}
+					case 203: {
+				%>
+				<%@include file="/lessons/lesson203.jsp"%>
+				<%
+					break;
+					}
+					case 204: {
+				%>
+				<%@include file="/lessons/lesson204.jsp"%>
+				<%
+					break;
+					}
+					case 205: {
+				%>
+				<%@include file="/lessons/lesson205.jsp"%>
+				<%
+					break;
+					}
+					case 206: {
+				%>
+				<%@include file="/lessons/lesson206.jsp"%>
+				<%
+					break;
+					}
+					case 207: {
+				%>
+				<%@include file="/lessons/lesson207.jsp"%>
+				<%
+					break;
+					}
+					case 208: {
+				%>
+				<%@include file="/lessons/lesson208.jsp"%>
+				<%
+					break;
+					}
+					case 209: {
+				%>
+				<%@include file="/lessons/lesson209.jsp"%>
+				<%
+					break;
+					}
+					case 301: {
+				%>
+				<%@include file="/lessons/lesson301.jsp"%>
+				<%
+					break;
+					}
+					case 302: {
+				%>
+				<%@include file="/lessons/lesson302.jsp"%>
+				<%
+					break;
+					}
+					case 303: {
+				%>
+				<%@include file="/lessons/lesson303.jsp"%>
+				<%
+					break;
+					}
+					case 304: {
+				%>
+				<%@include file="/lessons/lesson304.jsp"%>
+				<%
+					break;
+					}
+					case 305: {
+				%>
+				<%@include file="/lessons/lesson305.jsp"%>
+				<%
+					break;
+					}
+					case 306: {
+				%>
+				<%@include file="/lessons/lesson306.jsp"%>
+				<%
+					break;
+					}
+					case 307: {
+				%>
+				<%@include file="/lessons/lesson307.jsp"%>
+				<%
+					break;
+					}
+					case 308: {
+				%>
+				<%@include file="/lessons/lesson308.jsp"%>
+				<%
+					break;
+					}
 					}
 				%>
 
@@ -75,7 +178,7 @@
 			</a>
 			<div class="space"></div>
 			<%
-				if (noLesson != 107 && noLesson != 209) {
+				if (noLesson != 107 && noLesson != 209 && noLesson != 308) {
 			%>
 			<form action="Next" method="post">
 				<button type="submit" class="logout">Next</button>

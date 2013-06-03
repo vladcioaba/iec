@@ -35,11 +35,6 @@
 			<form action="StartLesson" method="post">
 				<button type="submit" class="logout">Start Lesson</button>
 			</form>
-			<a onclick="alert( 'Page Under Construction!' )" class="button">
-				<div class="button2">
-					<h2>View Statistics</h2>
-				</div>
-			</a>
 		</div>
 	</div>
 </div>
