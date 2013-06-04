@@ -20,6 +20,7 @@
 		} else {
 			int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"))/100;
 			test = DatabaseManager.getTest(noLesson);
+			session.setAttribute("test", test);
 		}
 	%>
 	<div class="Main">
