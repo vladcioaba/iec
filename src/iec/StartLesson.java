@@ -15,14 +15,9 @@ import javax.servlet.http.HttpSession;
 public class StartLesson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public StartLesson() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
 
 	/*
 	 * protected void doGet(HttpServletRequest request, HttpServletResponse
@@ -33,7 +28,7 @@ public class StartLesson extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
 		HttpSession session = request.getSession();
-		int noLesson = 101;
+		int noLesson = 301;
 		session.setAttribute("noLesson", String.valueOf(noLesson));
 		response.sendRedirect("lesson.jsp");
 		return;

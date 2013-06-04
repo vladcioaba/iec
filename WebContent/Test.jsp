@@ -17,8 +17,9 @@
 		if (DatabaseManager.isFirstTime((Integer) session.getAttribute("userID"))) {
 			test = DatabaseManager.getFirstTest();
 			session.setAttribute("test", test);
-		} else{
-			
+		} else {
+			int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"))/100;
+			test = DatabaseManager.getTest(noLesson);
 		}
 	%>
 	<div class="Main">

@@ -168,6 +168,78 @@
 				<%
 					break;
 					}
+					case 401: {
+				%>
+				<%@include file="/lessons/lesson401.jsp"%>
+				<%
+					break;
+					}
+					case 402: {
+				%>
+				<%@include file="/lessons/lesson402.jsp"%>
+				<%
+					break;
+					}
+					case 403: {
+				%>
+				<%@include file="/lessons/lesson403.jsp"%>
+				<%
+					break;
+					}
+					case 404: {
+				%>
+				<%@include file="/lessons/lesson404.jsp"%>
+				<%
+					break;
+					}
+					case 405: {
+				%>
+				<%@include file="/lessons/lesson405.jsp"%>
+				<%
+					break;
+					}
+					case 406: {
+				%>
+				<%@include file="/lessons/lesson406.jsp"%>
+				<%
+					break;
+					}
+					case 407: {
+				%>
+				<%@include file="/lessons/lesson407.jsp"%>
+				<%
+					break;
+					}
+					case 408: {
+				%>
+				<%@include file="/lessons/lesson408.jsp"%>
+				<%
+					break;
+					}
+					case 501: {
+				%>
+				<%@include file="/lessons/lesson501.jsp"%>
+				<%
+					break;
+					}
+					case 502: {
+				%>
+				<%@include file="/lessons/lesson502.jsp"%>
+				<%
+					break;
+					}
+					case 503: {
+				%>
+				<%@include file="/lessons/lesson503.jsp"%>
+				<%
+					break;
+					}
+					case 504: {
+				%>
+				<%@include file="/lessons/lesson504.jsp"%>
+				<%
+					break;
+					}
 					}
 				%>
 
@@ -186,7 +258,7 @@
 			</a>
 			<div class="space"></div>
 			<%
-				if (noLesson != 107 && noLesson != 209 && noLesson != 308) {
+				if (noLesson != 107 && noLesson != 209 && noLesson != 308 && noLesson != 408 && noLesson != 504) {
 			%>
 			<form action="Next" method="post">
 				<button type="submit" class="logout">Next</button>

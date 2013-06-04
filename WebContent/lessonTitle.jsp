@@ -98,5 +98,53 @@
 		out.print("3.8 Splitting Programs into Different Files");
 		break;
 	}
+	case 401: {
+		out.print("4.1 Why Use Files?");
+		break;
+	}
+	case 402: {
+		out.print("4.2 Streams.");
+		break;
+	}
+	case 403: {
+		out.print("4.3 Creating Streams.");
+		break;
+	}
+	case 404: {
+		out.print("4.4  Connecting and Disconnecting Streams to Files.");
+		break;
+	}
+	case 405: {
+		out.print("4.5 Checking for Failure with File Commands.");
+		break;
+	}
+	case 406: {
+		out.print("4.6. Character Input and Output.");
+		break;
+	}
+	case 407: {
+		out.print("4.7 Checking for the End of an Input File.");
+		break;
+	}
+	case 408: {
+		out.print("4.8 Streams as Arguments in Functions.");
+		break;
+	}
+	case 501: {
+		out.print("5.1 Boolean Values, Expressions and Functions.");
+		break;
+	}
+	case 502: {
+		out.print("5.2 \"For\", \"While\" and \"Do ... While\" Loops.");
+		break;
+	}
+	case 503: {
+		out.print("5.3 Multiple Selection and Switch Statements.");
+		break;
+	}
+	case 504: {
+		out.print("5.4 Summary.");
+		break;
+	}
 	}
 %>

@@ -296,7 +296,7 @@ public class DatabaseManager {
 		return false;
 	}
 
-	public static synchronized ArrayList getFirstTest() {
+	public static synchronized ArrayList<Test> getFirstTest() {
 		ArrayList<Test> list = new ArrayList<Test>();
 		ArrayList<Test> haha = new ArrayList<Test>();
 		int easy = 0, intermediate = 0, hard = 0;
@@ -311,17 +311,17 @@ public class DatabaseManager {
 			while (haha.size() < 9) {
 				int i = (int) (Math.random() * list.size());
 				if (!haha.contains(list.get(i))) {
-					if(list.get(i).getTestDifficulty()==1 && easy<3){
+					if (list.get(i).getTestDifficulty() == 1 && easy < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if(list.get(i).getTestDifficulty()==2 && intermediate<3){
+					if (list.get(i).getTestDifficulty() == 2 && intermediate < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if(list.get(i).getTestDifficulty()==3 && hard<3){
+					if (list.get(i).getTestDifficulty() == 3 && hard < 3) {
 						haha.add(list.get(i));
 					}
 				}
@@ -331,6 +331,35 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return haha;
+	}
+
+	public static synchronized ArrayList<Test> getTest(int noLesson) {
+		ArrayList<Test> list = new ArrayList<Test>();
+		try {
+			PreparedStatement stmt = mConnection
+					.prepareStatement("select * from teste where difficulty=? order by rand() limit ?");
+			stmt.setInt(1, noLesson);
+			if (noLesson <= 3) {
+				stmt.setInt(2, 5);
+			} else {
+				if (noLesson <= 6) {
+					stmt.setInt(2, 7);
+				} else {
+					stmt.setInt(2, 9);
+				}
+			}
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Test test = new Test(rs.getInt("testid"), rs.getInt("type"), rs.getInt("difficulty"),
+						rs.getString("body"), rs.getString("answere"), rs.getInt("correct"));
+				list.add(test);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	private static Connection mConnection;
