@@ -1,51 +1,47 @@
 package iec.data;
 
-public class Test {
+import java.io.Serializable;
 
-	public Test(int id, int type, int difficulty, String body, String answer, int correct)
-	{
+public class Test implements Serializable{
+
+	public Test(int id, int type, int difficulty, String body, String answer, int correct) {
 		mTestId = id;
 		mTestType = type;
 		mTestBody = body;
 		mTestAnswers = answer.split("\\\\n\\\\r");
 		mTestCorrectAnswerIndex = correct;
+		mTestDifficulty = difficulty;
 	}
-	
-	public int getTestId()
-	{
+
+	public int getTestId() {
 		return mTestId;
 	}
-	
-	public int getTestType()
-	{
+
+	public int getTestType() {
 		return mTestType;
 	}
-	
-	public String getTestBody()
-	{
+
+	public String getTestBody() {
 		return mTestBody;
 	}
-	
-	public String[] getTestAnswers()
-	{
+
+	public String[] getTestAnswers() {
 		return mTestAnswers;
 	}
-	
-	public int	getCorrectAnswerIndex()
-	{
+
+	public int getCorrectAnswerIndex() {
 		return mTestCorrectAnswerIndex;
 	}
-	
-	public int getTestDifficulty()
-	{
+
+	public int getTestDifficulty() {
 		return mTestDifficulty;
 	}
-	
-	private int			mTestId;
-	private int			mTestType;
-	private String		mTestBody;
-	private String[]	mTestAnswers;
-	private int			mTestCorrectAnswerIndex;
-	private int			mTestDifficulty;
-	
+
+	private int mTestId;
+	private int mTestType;
+	private String mTestBody;
+	private String[] mTestAnswers;
+	private int mTestCorrectAnswerIndex;
+	private int mTestDifficulty;
+
 }

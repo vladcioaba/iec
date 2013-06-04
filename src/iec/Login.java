@@ -1,5 +1,6 @@
 package iec;
 
+import iec.data.User;
 import iec.database.DatabaseManager;
 
 import java.io.IOException;
@@ -45,7 +46,9 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		try {
-			if (LoggedInUsers.isValid(username, password)) {
+			User user = LoggedInUsers.isValid(username, password);
+			if (user!=null) {
+				session.setAttribute("userID", user.getUserId());
 				session.setAttribute("userName", username);
 				response.sendRedirect("userScreen.jsp");
 				return;

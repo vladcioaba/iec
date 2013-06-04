@@ -41,22 +41,16 @@ public class LoggedInUsers {
 		t.start();
 	}
 
-	public static boolean isValid(String username, String password) {
+	public static User isValid(String username, String password) {
 		User user = DatabaseManager.autenticateUser(username, password);
 		if (user.getUserId() != -1) {
 			logUser(user);
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 	}
 
-	public static synchronized void removeUser(String userName) {
-		Set<String> s = loggedUsers.keySet();
-		for (String str : s) {
-			if (loggedUsers.get(str).equals(userName)) {
-				loggedUsers.remove(str);
-				break;
-			}
-		}
+	public static synchronized void removeUser(String userID) {
+		loggedUsers.remove(userID);
 	}
 }

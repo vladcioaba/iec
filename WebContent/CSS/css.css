@@ -540,7 +540,7 @@ button {
 	border-color: 99CCFF;
 	width: 130px;
 	height: 50px;
-	margin-left: 20px;
+	margin-left: 110px;
 	background-color: #F0F0F0;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
@@ -634,3 +634,8 @@ h2.button {
 div.list {
 	width: 100%;
 }
+
+input.q {
+	width:15px;
+	height:15px;
+	}

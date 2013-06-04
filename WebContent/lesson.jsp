@@ -1,4 +1,12 @@
+<%@page import="iec.database.DatabaseManager"%>
 <%@include file="/header.jsp"%>
+
+<%
+	if (DatabaseManager.isFirstTime((Integer) session.getAttribute("userID"))) {
+		response.sendRedirect("Test.jsp");
+		return;
+	}
+%>
 <div class="MainBack" align="center">
 	<div class="taskbar">
 		<div class="header">

@@ -1,4 +1,6 @@
+<%@page import="iec.database.DatabaseManager"%>
 <%@include file="/header.jsp"%>
+
 <div class="MainBack" align="center">
 	<div class="taskbar">
 		<div class="header">
