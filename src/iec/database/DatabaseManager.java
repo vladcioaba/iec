@@ -202,12 +202,13 @@ public class DatabaseManager {
 			while (result.next()) {
 				int testId = result.getInt("testid");
 				int testType = result.getInt("type");
-				int testDifficulty = result.getInt("difficulty");
+				int testLessonNr = result.getInt("lesson_nr");
 				String testBody = result.getString("body");
 				String testAnswer = result.getString("answere");
 				int correct = result.getInt("correct");
+				int difficulty = result.getInt("difficulty");
 
-				ret.addElement(new Test(testId, testType, testDifficulty, testBody, testAnswer, correct));
+				ret.addElement(new Test(testId, testType, testLessonNr, testBody, testAnswer, correct, difficulty));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -304,24 +305,24 @@ public class DatabaseManager {
 			PreparedStatement stmt = mConnection.prepareStatement("select * from teste");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Test test = new Test(rs.getInt("testid"), rs.getInt("type"), rs.getInt("difficulty"),
-						rs.getString("body"), rs.getString("answere"), rs.getInt("correct"));
+				Test test = new Test(rs.getInt("testid"), rs.getInt("type"), rs.getInt("lesson_nr"),
+						rs.getString("body"), rs.getString("answere"), rs.getInt("correct"), rs.getInt("difficulty"));
 				list.add(test);
 			}
 			while (haha.size() < 9) {
 				int i = (int) (Math.random() * list.size());
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestDifficulty() == 1 && easy < 3) {
+					if (list.get(i).getTestLessonNr() == 1 && easy < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestDifficulty() == 2 && intermediate < 3) {
+					if (list.get(i).getTestLessonNr() == 2 && intermediate < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestDifficulty() == 3 && hard < 3) {
+					if (list.get(i).getTestLessonNr() == 3 && hard < 3) {
 						haha.add(list.get(i));
 					}
 				}
@@ -337,7 +338,7 @@ public class DatabaseManager {
 		ArrayList<Test> list = new ArrayList<Test>();
 		try {
 			PreparedStatement stmt = mConnection
-					.prepareStatement("select * from teste where difficulty=? order by rand() limit ?");
+					.prepareStatement("select * from teste where lesson_nr=? order by rand() limit ?");
 			stmt.setInt(1, noLesson);
 			if (noLesson <= 3) {
 				stmt.setInt(2, 5);
@@ -350,8 +351,8 @@ public class DatabaseManager {
 			}
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Test test = new Test(rs.getInt("testid"), rs.getInt("type"), rs.getInt("difficulty"),
-						rs.getString("body"), rs.getString("answere"), rs.getInt("correct"));
+				Test test = new Test(rs.getInt("testid"), rs.getInt("type"), rs.getInt("lesson_nr"),
+						rs.getString("body"), rs.getString("answere"), rs.getInt("correct"), rs.getInt("difficulty"));
 				list.add(test);
 			}
 
