@@ -11,7 +11,7 @@ public class Test implements Serializable {
 		mTestAnswers = answer.split("\\\\n\\\\r");
 		mTestCorrectAnswerValue = correct;
 		mTestLessonNr = lessonNr;
-		this.difficulty = difficulty;
+		mTestDifficulty = difficulty;
 	}
 
 	public int getTestId() {
@@ -30,7 +30,7 @@ public class Test implements Serializable {
 		return mTestAnswers;
 	}
 
-	public int getCorrectAnswerValue() {
+	public int getTestCorrectAnswerValue() {
 		return mTestCorrectAnswerValue;
 	}
 
@@ -38,8 +38,8 @@ public class Test implements Serializable {
 		return mTestLessonNr;
 	}
 
-	public int getDifficulty() {
-		return difficulty;
+	public int getTestDifficulty() {
+		return mTestDifficulty;
 	}
 
 	private int mTestId;
@@ -48,6 +48,6 @@ public class Test implements Serializable {
 	private String[] mTestAnswers;
 	private int mTestCorrectAnswerValue;
 	private int mTestLessonNr;
-	private int difficulty;
+	private int mTestDifficulty;
 
 }
