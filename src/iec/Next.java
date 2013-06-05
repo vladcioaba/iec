@@ -30,9 +30,9 @@ public class Next extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
 		HttpSession session = request.getSession();
-		int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"));
+		int noLesson = (Integer) session.getAttribute("noLesson");
 		noLesson++;
-		session.setAttribute("noLesson", String.valueOf(noLesson));
+		session.setAttribute("noLesson", noLesson);
 		response.sendRedirect("lesson.jsp");
 		return;
 	}

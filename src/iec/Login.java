@@ -47,11 +47,18 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		try {
 			User user = LoggedInUsers.isValid(username, password);
-			if (user!=null) {
+			if (user != null) {
 				session.setAttribute("userID", user.getUserId());
 				session.setAttribute("userName", username);
-				response.sendRedirect("userScreen.jsp");
-				return;
+				session.setAttribute("isAdmin", user.getmUserIsAdmin());
+				session.setAttribute("noLesson", user.getmCurrentLessonn());
+				if (user.getmUserIsAdmin() == 1) {
+					response.sendRedirect("userScreen.jsp");
+				} else {
+					response.sendRedirect("userScreen.jsp");
+					return;
+				}
+
 			} else {
 				session.setAttribute("invalidData", "Datele de logare sunt invalide!");
 				response.sendRedirect("index.jsp");

@@ -35,15 +35,9 @@
 			<form action="StartLesson" method="post">
 				<button type="submit" class="logout">Start Lesson</button>
 			</form>
-			<%
-				if (((Integer) session.getAttribute("isAdmin")).intValue() == 1) {
-			%>
-			<form action="AddUserPage" method="post">
+			<form action="AddUser" method="post">
 				<button type="submit" class="logout">Add User</button>
 			</form>
-			<%
-				}
-			%>
 		</div>
 	</div>
 </div>

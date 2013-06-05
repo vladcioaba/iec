@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
 <%@page import="iec.data.Test"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="iec.database.DatabaseManager"%>
@@ -18,7 +20,7 @@
 			test = DatabaseManager.getFirstTest();
 			session.setAttribute("test", test);
 		} else {
-			int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"))/100;
+			int noLesson = (Integer) session.getAttribute("noLesson") / 100;
 			test = DatabaseManager.getTest(noLesson);
 			session.setAttribute("test", test);
 		}
@@ -40,6 +42,9 @@
 						%>
 					</div>
 					<%
+						Date startTime = new Date(Calendar.getInstance().getTimeInMillis());
+							session.setAttribute("start", startTime);
+
 						}
 					%>
 

@@ -1,34 +1,35 @@
 package iec;
 
+import iec.database.DatabaseManager;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class StartLesson
+ * Servlet implementation class AddUser
  */
-@WebServlet("/StartLesson")
-public class StartLesson extends HttpServlet {
+@WebServlet("/AddUser")
+public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public StartLesson() {
-		super();
-	}
-
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { // TODO Auto-generated
-	 * method stub }
+	/**
+	 * @see HttpServlet#HttpServlet()
 	 */
+	public AddUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
-		HttpSession session = request.getSession();
-		response.sendRedirect("lesson.jsp");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		DatabaseManager.addUser(username, password);
+		response.sendRedirect("userScreen.jsp");
 		return;
 	}
 

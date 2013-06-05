@@ -6,29 +6,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class StartLesson
+ * Servlet implementation class AddUserPage
  */
-@WebServlet("/StartLesson")
-public class StartLesson extends HttpServlet {
+@WebServlet("/AddUserPage")
+public class AddUserPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public StartLesson() {
-		super();
-	}
-
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { // TODO Auto-generated
-	 * method stub }
+	/**
+	 * @see HttpServlet#HttpServlet()
 	 */
+	public AddUserPage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
-		HttpSession session = request.getSession();
-		response.sendRedirect("lesson.jsp");
+		response.sendRedirect("addUser.jsp");
 		return;
 	}
 

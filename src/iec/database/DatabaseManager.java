@@ -92,7 +92,7 @@ public class DatabaseManager {
 			return null;
 		}
 
-		User ret = new User(userId, name, date);
+		User ret = new User(userId, name, date, 0, 0);
 		return ret;
 	}
 
@@ -123,9 +123,10 @@ public class DatabaseManager {
 		Date date = new Date(Calendar.getInstance().getTimeInMillis());
 		String md5pass = convertToMd5(password);
 		int userId = -1;
-
+		int isAdmin = 0;
+		int currentLesson = 0;
 		try {
-			String select_query = "select userid from users where name = ? and password = ?";
+			String select_query = "select userid, isAdmin, currentLesson from users where name = ? and password = ?";
 			PreparedStatement preparedStmt = (PreparedStatement) mConnection.prepareStatement(select_query);
 			preparedStmt.setString(1, name);
 			preparedStmt.setString(2, md5pass);
@@ -134,6 +135,8 @@ public class DatabaseManager {
 			ResultSet result = preparedStmt.executeQuery();
 			while (result.next()) {
 				userId = result.getInt(1);
+				isAdmin = result.getInt("isAdmin");
+				currentLesson = result.getInt("currentLesson");
 				break;
 			}
 			result.close();
@@ -151,7 +154,7 @@ public class DatabaseManager {
 			return null;
 		}
 
-		User ret = new User(userId, name, date);
+		User ret = new User(userId, name, date, isAdmin, currentLesson);
 		return ret;
 	}
 
@@ -312,17 +315,17 @@ public class DatabaseManager {
 			while (haha.size() < 9) {
 				int i = (int) (Math.random() * list.size());
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestLessonNr() == 1 && easy < 3) {
+					if ((list.get(i).getTestLessonNr() == 1 || list.get(i).getTestLessonNr() == 2) && easy < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestLessonNr() == 2 && intermediate < 3) {
+					if ((list.get(i).getTestLessonNr() == 3 || list.get(i).getTestLessonNr() == 4) && intermediate < 3) {
 						haha.add(list.get(i));
 					}
 				}
 				if (!haha.contains(list.get(i))) {
-					if (list.get(i).getTestLessonNr() == 3 && hard < 3) {
+					if ((list.get(i).getTestLessonNr() == 5 || list.get(i).getTestLessonNr() == 6) && hard < 3) {
 						haha.add(list.get(i));
 					}
 				}
@@ -340,10 +343,10 @@ public class DatabaseManager {
 			PreparedStatement stmt = mConnection
 					.prepareStatement("select * from teste where lesson_nr=? order by rand() limit ?");
 			stmt.setInt(1, noLesson);
-			if (noLesson <= 3) {
+			if (noLesson <= 2) {
 				stmt.setInt(2, 5);
 			} else {
-				if (noLesson <= 6) {
+				if (noLesson <= 4) {
 					stmt.setInt(2, 7);
 				} else {
 					stmt.setInt(2, 9);
@@ -362,6 +365,35 @@ public class DatabaseManager {
 		}
 		return list;
 	}
+
+	public static synchronized boolean setCurrentLesson(int userID, int noLesson) {
+		try {
+			PreparedStatement stmt = mConnection
+					.prepareStatement("update users set currentLesson = ?  where userid = ?");
+			stmt.setInt(1, noLesson);
+			stmt.setInt(2, userID);
+			stmt.execute();
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static synchronized boolean setIsNotFirstTime(int userID) {
+		try {
+			PreparedStatement stmt = mConnection
+					.prepareStatement("update users set isFirstTime = 0  where userid = ?");
+			stmt.setInt(1, userID);
+			stmt.execute();
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 	private static Connection mConnection;
 

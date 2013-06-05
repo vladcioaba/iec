@@ -636,6 +636,26 @@ div.list {
 }
 
 input.q {
-	width:15px;
-	height:15px;
-	}
+	width: 15px;
+	height: 15px;
+}
+
+div.innerright2 {
+	width: 50%;
+	height: 30%;
+	float: left;
+	margin-top: 20px;
+	padding-left: 49%;
+}
+
+input.add {
+	width: 300px;
+	height: 40px;
+	margin: 6px;
+	font-family: "Boulder";
+	font-size: 23px;
+	margin: 10px;
+	margin-left: 0px;
+	text-align: left;
+	padding-left: 10px;
+}

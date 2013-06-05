@@ -1,6 +1,6 @@
 
 <%
-	int noLesson = Integer.parseInt((String) session.getAttribute("noLesson"));
+	int noLesson = (Integer) session.getAttribute("noLesson");
 	switch (noLesson) {
 	case 101: {
 		out.print("1.1 Introduction to C++");
@@ -144,6 +144,34 @@
 	}
 	case 504: {
 		out.print("5.4 Summary.");
+		break;
+	}
+	case 601: {
+		out.print("6.1 The Basic Idea and Notation.");
+		break;
+	}
+	case 602: {
+		out.print("6.2 Assignment Statements and Expressions with Array Elements.");
+		break;
+	}
+	case 603: {
+		out.print("6.3 Assignment Statements and Expressions with Array Elements.");
+		break;
+	}
+	case 604: {
+		out.print("6.4 Arrays as Parameters in Functions.");
+		break;
+	}
+	case 605: {
+		out.print("6.5 Sorting Arrays.");
+		break;
+	}
+	case 606: {
+		out.print("6.6 Two-dimentional Arrays.");
+		break;
+	}
+	case 607: {
+		out.print("6.7 Strings.");
 		break;
 	}
 	}

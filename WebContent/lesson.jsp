@@ -240,6 +240,48 @@
 				<%
 					break;
 					}
+					case 601: {
+				%>
+				<%@include file="/lessons/lesson601.jsp"%>
+				<%
+					break;
+					}
+					case 602: {
+				%>
+				<%@include file="/lessons/lesson602.jsp"%>
+				<%
+					break;
+					}
+					case 603: {
+				%>
+				<%@include file="/lessons/lesson603.jsp"%>
+				<%
+					break;
+					}
+					case 604: {
+				%>
+				<%@include file="/lessons/lesson604.jsp"%>
+				<%
+					break;
+					}
+					case 605: {
+				%>
+				<%@include file="/lessons/lesson605.jsp"%>
+				<%
+					break;
+					}
+					case 606: {
+				%>
+				<%@include file="/lessons/lesson606.jsp"%>
+				<%
+					break;
+					}
+					case 607: {
+				%>
+				<%@include file="/lessons/lesson607.jsp"%>
+				<%
+					break;
+					}
 					}
 				%>
 
@@ -247,18 +289,13 @@
 		</div>
 
 		<div class="menu">
-			<a href="Upv2.html" class="button">
-				<div class="button2">
-					<h2>Cancel</h2>
-				</div>
-			</a> <a href="LLv2.html" class="button">
-				<div class="button2">
-					<h2>Return</h2>
-				</div>
-			</a>
+			<form action="GoToUserScreen" method="post">
+				<button type="submit" class="logout">Cancel</button>
+			</form>
 			<div class="space"></div>
 			<%
-				if (noLesson != 107 && noLesson != 209 && noLesson != 308 && noLesson != 408 && noLesson != 504) {
+				if (noLesson != 107 && noLesson != 209 && noLesson != 308 && noLesson != 408 && noLesson != 504
+						&& noLesson != 607) {
 			%>
 			<form action="Next" method="post">
 				<button type="submit" class="logout">Next</button>

@@ -18,15 +18,12 @@
 	<div class="Main">
 		<div class="content">
 			<div class="realcontent">
-				<p>
-					<br> GATHER ye rosebuds while ye may, <br> Old Time is still a-flying: <br> And this same flower
-					that smiles to-day<br> To-morrow will be dying. <br> <br> The glorious lamp of heaven, the sun, <br>
-					The higher he 's a-getting, <br> The sooner will his race be run, <br> And nearer he 's to setting. <br>
-					<br> That age is best which is the first, <br> When youth and blood are warmer; <br> But being
-					spent, the worse, and worst <br> Times still succeed the former. <br> <br> Then be not coy, but use
-					your time, <br> And while ye may, go marry: <br> For having lost but once your prime, <br> You may
-					for ever tarry.
-				</p>
+				<h1>
+					FELICITARI!<br>
+					<br>
+				</h1>
+
+				<h3>Ai terminat cu succes cursul!</h3>
 
 			</div>
 
