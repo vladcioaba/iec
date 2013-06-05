@@ -17,35 +17,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 public class DatabaseManager {
 
 	// **************************************************************************************************************************
 	// STATIC MEMBERS
 	// **************************************************************************************************************************
-
-	public static void main(String[] args) {
-		DatabaseManager dm = new DatabaseManager();
-		dm.create();
-
-		// User u1 = dm.addUser("pulica", "pulica");
-		// dm.autenticateUser("pulica", "pulica");
-		//
-		// dm.setTestComplete(u1.getUserId(), 2, 1, new Date(1), new Date(2));
-		// // dm.setTestComplete(2, 2, 1, new Date(1), new Date(2));
-		// // dm.setTestComplete(2, 2, 1, new Date(1), new Date(2));
-		//
-		// Vector<UserTest> vec = dm.getUserTestHistory(u1.getUserId());
-		// vec.size();
-
-		// dm.addUser("admin", "admin");
-
-		Vector<Test> tests = dm.getTests();
-		tests.size();
-
-		// dm.removeUser(u1.getUserId());
-	}
 
 	private static DatabaseManager sInstance;
 
@@ -380,10 +356,10 @@ public class DatabaseManager {
 		}
 		return false;
 	}
+
 	public static synchronized boolean setIsNotFirstTime(int userID) {
 		try {
-			PreparedStatement stmt = mConnection
-					.prepareStatement("update users set isFirstTime = 0  where userid = ?");
+			PreparedStatement stmt = mConnection.prepareStatement("update users set isFirstTime = 0  where userid = ?");
 			stmt.setInt(1, userID);
 			stmt.execute();
 			return true;
@@ -393,7 +369,6 @@ public class DatabaseManager {
 		}
 		return false;
 	}
-	
 
 	private static Connection mConnection;
 
