@@ -36,7 +36,7 @@
 						<%
 							out.print(t.getTestBody() + "<br><br>");
 								for (int i = 0; i < t.getTestAnswers().length; i++) {
-									out.print("<input class=\"q\" type=\"radio\" name=\"" + t.getTestId() + "\" value=\"" + i + "\" > "
+									out.print("<input class=\"q\" type=\"radio\" name=\"" + t.getTestId() + "\" value=\"" + i + "\" required=\"required\"> "
 											+ t.getTestAnswers()[i] + "<br>");
 								}
 						%>

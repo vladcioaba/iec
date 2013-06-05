@@ -21,7 +21,7 @@
 				<div class="realcontent">
 					<div class="addlogform">
 
-						<div class="addleft">
+						<div class="left">
 							<p class="logp">Username</p>
 							<p class="logp">Password</p>
 

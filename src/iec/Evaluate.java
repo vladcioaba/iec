@@ -69,13 +69,15 @@ public class Evaluate extends HttpServlet {
 
 		int iterator = 0;
 		for (Test t : allTests) {
-			currentAnswers[iterator][0] = Integer.parseInt(request.getParameter("" + t.getTestId()));
+			try {
+				currentAnswers[iterator][0] = Integer.parseInt(request.getParameter("" + t.getTestId()));
+			} catch (Exception e) {
+				currentAnswers[iterator][0] = -1;
+			}
 			currentAnswers[iterator][1] = t.getTestDifficulty();
 
 			// we update progress, according to difficulty
 			progressValue += this.calculateProgressValue(currentAnswers[iterator], t.getTestCorrectAnswerValue(), 1);
-
-			
 
 			// we save the Test Completion in the DB
 			DatabaseManager.setTestComplete(currentUserId, t.getTestId(), currentAnswers[iterator][0],
@@ -124,23 +126,26 @@ public class Evaluate extends HttpServlet {
 				}
 
 				// crash if we didn't find it
-//				if (foundTest == null) {
-//					throw (new ServletException("Previous History Test not found in test list!"));
-//				}
-//
-//				// we update the progress value
-//				int[] thisTestValues = new int[2];
-//				thisTestValues[0] = historicTestAnswer.getUserAnswer();
-//				thisTestValues[1] = foundTest.getTestDifficulty();
-//				progressValue += this.calculateProgressValue(thisTestValues, foundTest.getTestCorrectAnswerValue(), 3);
-				
-				if(foundTest!=null){
+				// if (foundTest == null) {
+				// throw (new
+				// ServletException("Previous History Test not found in test list!"));
+				// }
+				//
+				// // we update the progress value
+				// int[] thisTestValues = new int[2];
+				// thisTestValues[0] = historicTestAnswer.getUserAnswer();
+				// thisTestValues[1] = foundTest.getTestDifficulty();
+				// progressValue += this.calculateProgressValue(thisTestValues,
+				// foundTest.getTestCorrectAnswerValue(), 3);
+
+				if (foundTest != null) {
 					int[] thisTestValues = new int[2];
 					thisTestValues[0] = historicTestAnswer.getUserAnswer();
 					thisTestValues[1] = foundTest.getTestDifficulty();
-					progressValue += this.calculateProgressValue(thisTestValues, foundTest.getTestCorrectAnswerValue(), 3);
+					progressValue += this.calculateProgressValue(thisTestValues, foundTest.getTestCorrectAnswerValue(),
+							3);
 				}
-				
+
 			}
 
 			int currentLesson = (Integer) session.getAttribute("noLesson");
