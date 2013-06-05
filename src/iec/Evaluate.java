@@ -88,6 +88,7 @@ public class Evaluate extends HttpServlet {
 		session.removeAttribute("stop");
 		session.removeAttribute("start");
 		session.removeAttribute("test");
+		session.removeAttribute("isNotRefreshed");
 
 		if (DatabaseManager.isFirstTime(currentUserId)) {
 			// For the first test, we evaluate without history

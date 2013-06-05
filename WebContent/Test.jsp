@@ -16,14 +16,23 @@
 	</div>
 	<%
 		ArrayList<Test> test = null;
-		if (DatabaseManager.isFirstTime((Integer) session.getAttribute("userID"))) {
-			test = DatabaseManager.getFirstTest();
-			session.setAttribute("test", test);
-		} else {
-			int noLesson = (Integer) session.getAttribute("noLesson") / 100;
-			test = DatabaseManager.getTest(noLesson);
-			session.setAttribute("test", test);
+	
+		if(((Integer)session.getAttribute("isNotRefreshed"))==null){
+			if (DatabaseManager.isFirstTime((Integer) session.getAttribute("userID"))) {
+				test = DatabaseManager.getFirstTest();
+				session.setAttribute("test", test);
+			} else {
+				int noLesson = (Integer) session.getAttribute("noLesson") / 100;
+				test = DatabaseManager.getTest(noLesson);
+				session.setAttribute("test", test);
+			}
+			session.setAttribute("isNotRefreshed", 1);
 		}
+		else {
+			test = (ArrayList<Test>)session.getAttribute("test");
+		}
+	
+		
 	%>
 	<div class="Main">
 		<form action="Evaluate" method="post">
